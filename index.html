@@ -1,0 +1,943 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width">
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <link rel="stylesheet" href="mapbox/mapbox-gl.css">
+        <link rel="stylesheet" href="css/qgis2web.css">
+
+
+
+
+        <!--Added to invoke Map Box API-->
+        <script src="https://api.mapbox.com/mapbox-gl-js/v1.10.1/mapbox-gl.js"></script>
+      <link href="https://api.mapbox.com/mapbox-gl-js/v1.10.1/mapbox-gl.css" rel="stylesheet" />
+
+
+        <style>
+        #map {
+            width: 1273px;
+            height: 827px;
+        }
+        </style>
+        <title></title>
+
+
+    </head>
+    <body>
+        <div id="map">
+            <nav id="menu"></nav>
+        </div>
+        <script src="js/qgis2web_expressions.js"></script>
+        <script src="./mapbox/mapbox-gl.js"></script>
+        <script src="data/50MAX_RCA_Bridge_RestrictionsFreight_RCA_Bridge_Restrictions_50MAX_1.js"></script>
+        <script src="data/50MAX_RCA_Road_RestrictionsFreight_RCA_Road_Restrictions_50MAX_2.js"></script>
+        <script src="data/50MAX_SH_Road_Restrictions1Freight_SH_Restrictions_50MAX_3.js"></script>
+        <script src="data/State_Highway_Traffic_Monitoring_Sites3322e812_77e2_4f75_af98_ac560c9828502020328_1_1x1m43aayuc_4.js"></script>
+
+
+        <!--Added to invoke Map Box Directions API-->
+        <script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-directions/v4.0.2/mapbox-gl-directions.js"></script>
+      <link
+      rel="stylesheet"
+      href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-directions/v4.0.2/mapbox-gl-directions.css"
+      type="text/css"
+      />
+
+
+      <script src="./mapbox/style.js"></script>
+      <script src="./js/Autolinker.min.js"></script>
+      <script>
+
+
+// Added MapBox Access Token to invoke MapBox Directions API
+mapboxgl.accessToken = 'pk.eyJ1Ijoia2VuODkiLCJhIjoiY2thaGh2NWJpMDBseTJ3bTJ4dzNvM2ZoZyJ9.PHi7wySBn44cgySEbMJa7w';
+
+var map = new mapboxgl.Map({
+ container: 'map',
+ style: styleJSON,
+ center: [-177.07287621220752,-43.96181507233304],
+ zoom: 4,
+ bearing: 360.0,
+ attributionControl: false
+});
+map.addControl(new mapboxgl.NavigationControl(), 'top-left');
+map.addControl(new mapboxgl.AttributionControl({
+    customAttribution: '<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a> &middot; <a href="https://github.com/mapbox/mapbox-gl-js" target="_blank">Mapbox GL JS</a> &middot; <a href="https://qgis.org" target="_blank">QGIS</a>',
+    compact: false
+}));
+
+var autolinker = new Autolinker({truncate: {length: 30, location: 'smart'}});
+
+// Add mapbox input box for starting point of travel and ending point of travel
+map.addControl(
+new MapboxDirections({
+accessToken: mapboxgl.accessToken
+}),
+'top-left'
+);
+
+
+
+
+
+
+map.on('click', 'lyr_50MAX_RCA_Bridge_RestrictionsFreight_RCA_Bridge_Restrictions_50MAX_1_0', function (e) {
+    var description = '<table>\
+                    <tr>\
+                        <th scope="row">Name</th>\
+                        <td>' + (e.features[0].properties['Name'] !== null ? autolinker.link(e.features[0].properties['Name'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">description</th>\
+                        <td>' + (e.features[0].properties['description'] !== null ? autolinker.link(e.features[0].properties['description'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">timestamp</th>\
+                        <td>' + (e.features[0].properties['timestamp'] !== null ? autolinker.link(e.features[0].properties['timestamp'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">begin</th>\
+                        <td>' + (e.features[0].properties['begin'] !== null ? autolinker.link(e.features[0].properties['begin'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">end</th>\
+                        <td>' + (e.features[0].properties['end'] !== null ? autolinker.link(e.features[0].properties['end'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">altitudeMode</th>\
+                        <td>' + (e.features[0].properties['altitudeMode'] !== null ? autolinker.link(e.features[0].properties['altitudeMode'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">tessellate</th>\
+                        <td>' + (e.features[0].properties['tessellate'] !== null ? autolinker.link(e.features[0].properties['tessellate'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">extrude</th>\
+                        <td>' + (e.features[0].properties['extrude'] !== null ? autolinker.link(e.features[0].properties['extrude'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">visibility</th>\
+                        <td>' + (e.features[0].properties['visibility'] !== null ? autolinker.link(e.features[0].properties['visibility'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">drawOrder</th>\
+                        <td>' + (e.features[0].properties['drawOrder'] !== null ? autolinker.link(e.features[0].properties['drawOrder'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">icon</th>\
+                        <td>' + (e.features[0].properties['icon'] !== null ? autolinker.link(e.features[0].properties['icon'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">FID</th>\
+                        <td>' + (e.features[0].properties['FID'] !== null ? autolinker.link(e.features[0].properties['FID'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">objectID1</th>\
+                        <td>' + (e.features[0].properties['objectID1'] !== null ? autolinker.link(e.features[0].properties['objectID1'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">joinCount</th>\
+                        <td>' + (e.features[0].properties['joinCount'] !== null ? autolinker.link(e.features[0].properties['joinCount'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">targetFID</th>\
+                        <td>' + (e.features[0].properties['targetFID'] !== null ? autolinker.link(e.features[0].properties['targetFID'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">objectID</th>\
+                        <td>' + (e.features[0].properties['objectID'] !== null ? autolinker.link(e.features[0].properties['objectID'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">northing</th>\
+                        <td>' + (e.features[0].properties['northing'] !== null ? autolinker.link(e.features[0].properties['northing'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">easting</th>\
+                        <td>' + (e.features[0].properties['easting'] !== null ? autolinker.link(e.features[0].properties['easting'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">maxHPMV</th>\
+                        <td>' + (e.features[0].properties['maxHPMV'] !== null ? autolinker.link(e.features[0].properties['maxHPMV'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">RCA</th>\
+                        <td>' + (e.features[0].properties['RCA'] !== null ? autolinker.link(e.features[0].properties['RCA'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">roadName</th>\
+                        <td>' + (e.features[0].properties['roadName'] !== null ? autolinker.link(e.features[0].properties['roadName'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">owner</th>\
+                        <td>' + (e.features[0].properties['owner'] !== null ? autolinker.link(e.features[0].properties['owner'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">roadID</th>\
+                        <td>' + (e.features[0].properties['roadID'] !== null ? autolinker.link(e.features[0].properties['roadID'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">island</th>\
+                        <td>' + (e.features[0].properties['island'] !== null ? autolinker.link(e.features[0].properties['island'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">bridgeNo2</th>\
+                        <td>' + (e.features[0].properties['bridgeNo2'] !== null ? autolinker.link(e.features[0].properties['bridgeNo2'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">bridgeNo</th>\
+                        <td>' + (e.features[0].properties['bridgeNo'] !== null ? autolinker.link(e.features[0].properties['bridgeNo'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">bridgeID</th>\
+                        <td>' + (e.features[0].properties['bridgeID'] !== null ? autolinker.link(e.features[0].properties['bridgeID'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">status</th>\
+                        <td>' + (e.features[0].properties['status'] !== null ? autolinker.link(e.features[0].properties['status'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">removed</th>\
+                        <td>' + (e.features[0].properties['removed'] !== null ? autolinker.link(e.features[0].properties['removed'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>'
+
+    new mapboxgl.Popup()
+        .setLngLat(e.lngLat)
+        .setHTML(description)
+        .addTo(map);
+});
+
+// Change the cursor to a pointer when the mouse is over the places layer.
+map.on('mouseenter', 'lyr_50MAX_RCA_Bridge_RestrictionsFreight_RCA_Bridge_Restrictions_50MAX_1_0', function () {
+    map.getCanvas().style.cursor = 'pointer';
+});
+
+// Change it back to a pointer when it leaves.
+map.on('mouseleave', 'lyr_50MAX_RCA_Bridge_RestrictionsFreight_RCA_Bridge_Restrictions_50MAX_1_0', function () {
+    map.getCanvas().style.cursor = '';
+});
+map.on('click', 'lyr_50MAX_RCA_Road_RestrictionsFreight_RCA_Road_Restrictions_50MAX_2_0', function (e) {
+    var description = '<table>\
+                    <tr>\
+                        <th scope="row">Name</th>\
+                        <td>' + (e.features[0].properties['Name'] !== null ? autolinker.link(e.features[0].properties['Name'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">description</th>\
+                        <td>' + (e.features[0].properties['description'] !== null ? autolinker.link(e.features[0].properties['description'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">timestamp</th>\
+                        <td>' + (e.features[0].properties['timestamp'] !== null ? autolinker.link(e.features[0].properties['timestamp'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">begin</th>\
+                        <td>' + (e.features[0].properties['begin'] !== null ? autolinker.link(e.features[0].properties['begin'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">end</th>\
+                        <td>' + (e.features[0].properties['end'] !== null ? autolinker.link(e.features[0].properties['end'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">altitudeMode</th>\
+                        <td>' + (e.features[0].properties['altitudeMode'] !== null ? autolinker.link(e.features[0].properties['altitudeMode'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">tessellate</th>\
+                        <td>' + (e.features[0].properties['tessellate'] !== null ? autolinker.link(e.features[0].properties['tessellate'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">extrude</th>\
+                        <td>' + (e.features[0].properties['extrude'] !== null ? autolinker.link(e.features[0].properties['extrude'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">visibility</th>\
+                        <td>' + (e.features[0].properties['visibility'] !== null ? autolinker.link(e.features[0].properties['visibility'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">drawOrder</th>\
+                        <td>' + (e.features[0].properties['drawOrder'] !== null ? autolinker.link(e.features[0].properties['drawOrder'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">icon</th>\
+                        <td>' + (e.features[0].properties['icon'] !== null ? autolinker.link(e.features[0].properties['icon'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">FID</th>\
+                        <td>' + (e.features[0].properties['FID'] !== null ? autolinker.link(e.features[0].properties['FID'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">folderPath</th>\
+                        <td>' + (e.features[0].properties['folderPath'] !== null ? autolinker.link(e.features[0].properties['folderPath'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">symbolID</th>\
+                        <td>' + (e.features[0].properties['symbolID'] !== null ? autolinker.link(e.features[0].properties['symbolID'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">altMode</th>\
+                        <td>' + (e.features[0].properties['altMode'] !== null ? autolinker.link(e.features[0].properties['altMode'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">base</th>\
+                        <td>' + (e.features[0].properties['base'] !== null ? autolinker.link(e.features[0].properties['base'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">clamped</th>\
+                        <td>' + (e.features[0].properties['clamped'] !== null ? autolinker.link(e.features[0].properties['clamped'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">extruded</th>\
+                        <td>' + (e.features[0].properties['extruded'] !== null ? autolinker.link(e.features[0].properties['extruded'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">snippet</th>\
+                        <td>' + (e.features[0].properties['snippet'] !== null ? autolinker.link(e.features[0].properties['snippet'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">popUpInfo</th>\
+                        <td>' + (e.features[0].properties['popUpInfo'] !== null ? autolinker.link(e.features[0].properties['popUpInfo'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">road</th>\
+                        <td>' + (e.features[0].properties['road'] !== null ? autolinker.link(e.features[0].properties['road'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">roadName</th>\
+                        <td>' + (e.features[0].properties['roadName'] !== null ? autolinker.link(e.features[0].properties['roadName'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">xStart</th>\
+                        <td>' + (e.features[0].properties['xStart'] !== null ? autolinker.link(e.features[0].properties['xStart'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">yStart</th>\
+                        <td>' + (e.features[0].properties['yStart'] !== null ? autolinker.link(e.features[0].properties['yStart'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">xEnd</th>\
+                        <td>' + (e.features[0].properties['xEnd'] !== null ? autolinker.link(e.features[0].properties['xEnd'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">yEnd</th>\
+                        <td>' + (e.features[0].properties['yEnd'] !== null ? autolinker.link(e.features[0].properties['yEnd'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">RCA</th>\
+                        <td>' + (e.features[0].properties['RCA'] !== null ? autolinker.link(e.features[0].properties['RCA'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">ID2</th>\
+                        <td>' + (e.features[0].properties['ID2'] !== null ? autolinker.link(e.features[0].properties['ID2'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">SHAPE_Length</th>\
+                        <td>' + (e.features[0].properties['SHAPE_Length'] !== null ? autolinker.link(e.features[0].properties['SHAPE_Length'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>'
+
+    new mapboxgl.Popup()
+        .setLngLat(e.lngLat)
+        .setHTML(description)
+        .addTo(map);
+});
+
+// Change the cursor to a pointer when the mouse is over the places layer.
+map.on('mouseenter', 'lyr_50MAX_RCA_Road_RestrictionsFreight_RCA_Road_Restrictions_50MAX_2_0', function () {
+    map.getCanvas().style.cursor = 'pointer';
+});
+
+// Change it back to a pointer when it leaves.
+map.on('mouseleave', 'lyr_50MAX_RCA_Road_RestrictionsFreight_RCA_Road_Restrictions_50MAX_2_0', function () {
+    map.getCanvas().style.cursor = '';
+});
+map.on('click', 'lyr_50MAX_SH_Road_Restrictions1Freight_SH_Restrictions_50MAX_3_0', function (e) {
+    var description = '<table>\
+                    <tr>\
+                        <th scope="row">Name</th>\
+                        <td>' + (e.features[0].properties['Name'] !== null ? autolinker.link(e.features[0].properties['Name'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">description</th>\
+                        <td>' + (e.features[0].properties['description'] !== null ? autolinker.link(e.features[0].properties['description'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">timestamp</th>\
+                        <td>' + (e.features[0].properties['timestamp'] !== null ? autolinker.link(e.features[0].properties['timestamp'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">begin</th>\
+                        <td>' + (e.features[0].properties['begin'] !== null ? autolinker.link(e.features[0].properties['begin'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">end</th>\
+                        <td>' + (e.features[0].properties['end'] !== null ? autolinker.link(e.features[0].properties['end'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">altitudeMode</th>\
+                        <td>' + (e.features[0].properties['altitudeMode'] !== null ? autolinker.link(e.features[0].properties['altitudeMode'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">tessellate</th>\
+                        <td>' + (e.features[0].properties['tessellate'] !== null ? autolinker.link(e.features[0].properties['tessellate'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">extrude</th>\
+                        <td>' + (e.features[0].properties['extrude'] !== null ? autolinker.link(e.features[0].properties['extrude'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">visibility</th>\
+                        <td>' + (e.features[0].properties['visibility'] !== null ? autolinker.link(e.features[0].properties['visibility'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">drawOrder</th>\
+                        <td>' + (e.features[0].properties['drawOrder'] !== null ? autolinker.link(e.features[0].properties['drawOrder'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">icon</th>\
+                        <td>' + (e.features[0].properties['icon'] !== null ? autolinker.link(e.features[0].properties['icon'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">FID</th>\
+                        <td>' + (e.features[0].properties['FID'] !== null ? autolinker.link(e.features[0].properties['FID'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">joinCount</th>\
+                        <td>' + (e.features[0].properties['joinCount'] !== null ? autolinker.link(e.features[0].properties['joinCount'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">targetFID</th>\
+                        <td>' + (e.features[0].properties['targetFID'] !== null ? autolinker.link(e.features[0].properties['targetFID'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">objectID</th>\
+                        <td>' + (e.features[0].properties['objectID'] !== null ? autolinker.link(e.features[0].properties['objectID'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">structureN</th>\
+                        <td>' + (e.features[0].properties['structureN'] !== null ? autolinker.link(e.features[0].properties['structureN'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">bridgeID</th>\
+                        <td>' + (e.features[0].properties['bridgeID'] !== null ? autolinker.link(e.features[0].properties['bridgeID'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">assetID</th>\
+                        <td>' + (e.features[0].properties['assetID'] !== null ? autolinker.link(e.features[0].properties['assetID'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">BSN</th>\
+                        <td>' + (e.features[0].properties['BSN'] !== null ? autolinker.link(e.features[0].properties['BSN'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">displaceme</th>\
+                        <td>' + (e.features[0].properties['displaceme'] !== null ? autolinker.link(e.features[0].properties['displaceme'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">referenceS_</th>\
+                        <td>' + (e.features[0].properties['referenceS_'] !== null ? autolinker.link(e.features[0].properties['referenceS_'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">stateHighw</th>\
+                        <td>' + (e.features[0].properties['stateHighw'] !== null ? autolinker.link(e.features[0].properties['stateHighw'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">structureT</th>\
+                        <td>' + (e.features[0].properties['structureT'] !== null ? autolinker.link(e.features[0].properties['structureT'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">structur1</th>\
+                        <td>' + (e.features[0].properties['structur1'] !== null ? autolinker.link(e.features[0].properties['structur1'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">networkAre</th>\
+                        <td>' + (e.features[0].properties['networkAre'] !== null ? autolinker.link(e.features[0].properties['networkAre'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">networkA1</th>\
+                        <td>' + (e.features[0].properties['networkA1'] !== null ? autolinker.link(e.features[0].properties['networkA1'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">yearConst</th>\
+                        <td>' + (e.features[0].properties['yearConst'] !== null ? autolinker.link(e.features[0].properties['yearConst'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">speedLimi</th>\
+                        <td>' + (e.features[0].properties['speedLimi'] !== null ? autolinker.link(e.features[0].properties['speedLimi'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">bridgeOwn</th>\
+                        <td>' + (e.features[0].properties['bridgeOwn'] !== null ? autolinker.link(e.features[0].properties['bridgeOwn'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">startEasti</th>\
+                        <td>' + (e.features[0].properties['startEasti'] !== null ? autolinker.link(e.features[0].properties['startEasti'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">startNorth</th>\
+                        <td>' + (e.features[0].properties['startNorth'] !== null ? autolinker.link(e.features[0].properties['startNorth'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">ID</th>\
+                        <td>' + (e.features[0].properties['ID'] !== null ? autolinker.link(e.features[0].properties['ID'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">bridgeID1</th>\
+                        <td>' + (e.features[0].properties['bridgeID1'] !== null ? autolinker.link(e.features[0].properties['bridgeID1'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">BSN1</th>\
+                        <td>' + (e.features[0].properties['BSN1'] !== null ? autolinker.link(e.features[0].properties['BSN1'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">SH</th>\
+                        <td>' + (e.features[0].properties['SH'] !== null ? autolinker.link(e.features[0].properties['SH'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">RS</th>\
+                        <td>' + (e.features[0].properties['RS'] !== null ? autolinker.link(e.features[0].properties['RS'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">disp</th>\
+                        <td>' + (e.features[0].properties['disp'] !== null ? autolinker.link(e.features[0].properties['disp'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">region</th>\
+                        <td>' + (e.features[0].properties['region'] !== null ? autolinker.link(e.features[0].properties['region'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">name1</th>\
+                        <td>' + (e.features[0].properties['name1'] !== null ? autolinker.link(e.features[0].properties['name1'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">constnDate</th>\
+                        <td>' + (e.features[0].properties['constnDate'] !== null ? autolinker.link(e.features[0].properties['constnDate'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">designLoad</th>\
+                        <td>' + (e.features[0].properties['designLoad'] !== null ? autolinker.link(e.features[0].properties['designLoad'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">length</th>\
+                        <td>' + (e.features[0].properties['length'] !== null ? autolinker.link(e.features[0].properties['length'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">maxspan</th>\
+                        <td>' + (e.features[0].properties['maxspan'] !== null ? autolinker.link(e.features[0].properties['maxspan'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">minspan</th>\
+                        <td>' + (e.features[0].properties['minspan'] !== null ? autolinker.link(e.features[0].properties['minspan'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">maxFOC</th>\
+                        <td>' + (e.features[0].properties['maxFOC'] !== null ? autolinker.link(e.features[0].properties['maxFOC'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">roadWidth</th>\
+                        <td>' + (e.features[0].properties['roadWidth'] !== null ? autolinker.link(e.features[0].properties['roadWidth'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">acceptedM</th>\
+                        <td>' + (e.features[0].properties['acceptedM'] !== null ? autolinker.link(e.features[0].properties['acceptedM'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">regions</th>\
+                        <td>' + (e.features[0].properties['regions'] !== null ? autolinker.link(e.features[0].properties['regions'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">xCoordina</th>\
+                        <td>' + (e.features[0].properties['xCoordina'] !== null ? autolinker.link(e.features[0].properties['xCoordina'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">yCoordina</th>\
+                        <td>' + (e.features[0].properties['yCoordina'] !== null ? autolinker.link(e.features[0].properties['yCoordina'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">bridgeStr</th>\
+                        <td>' + (e.features[0].properties['bridgeStr'] !== null ? autolinker.link(e.features[0].properties['bridgeStr'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">island</th>\
+                        <td>' + (e.features[0].properties['island'] !== null ? autolinker.link(e.features[0].properties['island'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">TLAName</th>\
+                        <td>' + (e.features[0].properties['TLAName'] !== null ? autolinker.link(e.features[0].properties['TLAName'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">TLAID</th>\
+                        <td>' + (e.features[0].properties['TLAID'] !== null ? autolinker.link(e.features[0].properties['TLAID'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">noninj</th>\
+                        <td>' + (e.features[0].properties['noninj'] !== null ? autolinker.link(e.features[0].properties['noninj'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">miPrinx</th>\
+                        <td>' + (e.features[0].properties['miPrinx'] !== null ? autolinker.link(e.features[0].properties['miPrinx'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>'
+
+    new mapboxgl.Popup()
+        .setLngLat(e.lngLat)
+        .setHTML(description)
+        .addTo(map);
+});
+
+// Change the cursor to a pointer when the mouse is over the places layer.
+map.on('mouseenter', 'lyr_50MAX_SH_Road_Restrictions1Freight_SH_Restrictions_50MAX_3_0', function () {
+    map.getCanvas().style.cursor = 'pointer';
+});
+
+// Change it back to a pointer when it leaves.
+map.on('mouseleave', 'lyr_50MAX_SH_Road_Restrictions1Freight_SH_Restrictions_50MAX_3_0', function () {
+    map.getCanvas().style.cursor = '';
+});
+map.on('click', 'lyr_State_Highway_Traffic_Monitoring_Sites3322e812_77e2_4f75_af98_ac560c9828502020328_1_1x1m43aayuc_4_0', function (e) {
+    var description = '<table>\
+                    <tr>\
+                        <th scope="row">Name</th>\
+                        <td>' + (e.features[0].properties['Name'] !== null ? autolinker.link(e.features[0].properties['Name'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">description</th>\
+                        <td>' + (e.features[0].properties['description'] !== null ? autolinker.link(e.features[0].properties['description'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">timestamp</th>\
+                        <td>' + (e.features[0].properties['timestamp'] !== null ? autolinker.link(e.features[0].properties['timestamp'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">begin</th>\
+                        <td>' + (e.features[0].properties['begin'] !== null ? autolinker.link(e.features[0].properties['begin'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">end</th>\
+                        <td>' + (e.features[0].properties['end'] !== null ? autolinker.link(e.features[0].properties['end'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">altitudeMode</th>\
+                        <td>' + (e.features[0].properties['altitudeMode'] !== null ? autolinker.link(e.features[0].properties['altitudeMode'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">tessellate</th>\
+                        <td>' + (e.features[0].properties['tessellate'] !== null ? autolinker.link(e.features[0].properties['tessellate'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">extrude</th>\
+                        <td>' + (e.features[0].properties['extrude'] !== null ? autolinker.link(e.features[0].properties['extrude'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">visibility</th>\
+                        <td>' + (e.features[0].properties['visibility'] !== null ? autolinker.link(e.features[0].properties['visibility'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">drawOrder</th>\
+                        <td>' + (e.features[0].properties['drawOrder'] !== null ? autolinker.link(e.features[0].properties['drawOrder'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">icon</th>\
+                        <td>' + (e.features[0].properties['icon'] !== null ? autolinker.link(e.features[0].properties['icon'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">OBJECTID</th>\
+                        <td>' + (e.features[0].properties['OBJECTID'] !== null ? autolinker.link(e.features[0].properties['OBJECTID'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">SH</th>\
+                        <td>' + (e.features[0].properties['SH'] !== null ? autolinker.link(e.features[0].properties['SH'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">RS</th>\
+                        <td>' + (e.features[0].properties['RS'] !== null ? autolinker.link(e.features[0].properties['RS'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">RP</th>\
+                        <td>' + (e.features[0].properties['RP'] !== null ? autolinker.link(e.features[0].properties['RP'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">siteRef</th>\
+                        <td>' + (e.features[0].properties['siteRef'] !== null ? autolinker.link(e.features[0].properties['siteRef'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">lane</th>\
+                        <td>' + (e.features[0].properties['lane'] !== null ? autolinker.link(e.features[0].properties['lane'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">type</th>\
+                        <td>' + (e.features[0].properties['type'] !== null ? autolinker.link(e.features[0].properties['type'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">percentHeavy</th>\
+                        <td>' + (e.features[0].properties['percentHeavy'] !== null ? autolinker.link(e.features[0].properties['percentHeavy'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">equipmentCurrent</th>\
+                        <td>' + (e.features[0].properties['equipmentCurrent'] !== null ? autolinker.link(e.features[0].properties['equipmentCurrent'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">region</th>\
+                        <td>' + (e.features[0].properties['region'] !== null ? autolinker.link(e.features[0].properties['region'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">acceptedDays</th>\
+                        <td>' + (e.features[0].properties['acceptedDays'] !== null ? autolinker.link(e.features[0].properties['acceptedDays'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">AADT5yearsAgo</th>\
+                        <td>' + (e.features[0].properties['AADT5yearsAgo'] !== null ? autolinker.link(e.features[0].properties['AADT5yearsAgo'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">AADT4yearsAgo</th>\
+                        <td>' + (e.features[0].properties['AADT4yearsAgo'] !== null ? autolinker.link(e.features[0].properties['AADT4yearsAgo'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">AADT3yearsAgo</th>\
+                        <td>' + (e.features[0].properties['AADT3yearsAgo'] !== null ? autolinker.link(e.features[0].properties['AADT3yearsAgo'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">AADT2yearsAgo</th>\
+                        <td>' + (e.features[0].properties['AADT2yearsAgo'] !== null ? autolinker.link(e.features[0].properties['AADT2yearsAgo'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">AADT1yearAgo</th>\
+                        <td>' + (e.features[0].properties['AADT1yearAgo'] !== null ? autolinker.link(e.features[0].properties['AADT1yearAgo'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">siteType</th>\
+                        <td>' + (e.features[0].properties['siteType'] !== null ? autolinker.link(e.features[0].properties['siteType'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>'
+
+    new mapboxgl.Popup()
+        .setLngLat(e.lngLat)
+        .setHTML(description)
+        .addTo(map);
+});
+
+// Change the cursor to a pointer when the mouse is over the places layer.
+map.on('mouseenter', 'lyr_State_Highway_Traffic_Monitoring_Sites3322e812_77e2_4f75_af98_ac560c9828502020328_1_1x1m43aayuc_4_0', function () {
+    map.getCanvas().style.cursor = 'pointer';
+});
+
+// Change it back to a pointer when it leaves.
+map.on('mouseleave', 'lyr_State_Highway_Traffic_Monitoring_Sites3322e812_77e2_4f75_af98_ac560c9828502020328_1_1x1m43aayuc_4_0', function () {
+    map.getCanvas().style.cursor = '';
+});
+
+
+</script>
+
+<link rel="stylesheet" href="https://js.arcgis.com/3.32/dijit/themes/claro/claro.css">
+<link rel="stylesheet" href="https://js.arcgis.com/3.32/esri/css/esri.css">
+
+<script src="https://js.arcgis.com/3.32/"></script>
+<script>
+  require([
+    "esri/config",
+    "esri/map",
+    "esri/graphic",
+    "esri/tasks/RouteTask",
+    "esri/tasks/RouteParameters",
+
+    "esri/tasks/FeatureSet",
+    "esri/symbols/SimpleMarkerSymbol",
+    "esri/symbols/SimpleLineSymbol",
+
+    "esri/Color",
+    "dojo/_base/array",
+    "dojo/on",
+    "dojo/dom",
+    "dijit/registry",
+
+    "dijit/layout/BorderContainer",
+    "dijit/layout/ContentPane",
+    "dijit/form/HorizontalSlider",
+    "dijit/form/HorizontalRuleLabels"
+  ], function (
+    esriConfig, Map, Graphic, RouteTask, RouteParameters,
+    FeatureSet, SimpleMarkerSymbol, SimpleLineSymbol,
+    Color, array, on, dom, registry
+  ) {
+    var map2, routeTask, routeParams, routes = [];
+    var stopSymbol, barrierSymbol, routeSymbols;
+    var mapOnClick_addStops_connect, mapOnClick_addBarriers_connect;
+
+    map2 = new Map("map2", {
+      basemap: "streets",
+      center: [-177.07287621220752,-43.96181507233304],
+      zoom: 8
+    });
+
+    routeTask = new RouteTask("https://utility.arcgis.com/usrsvcs/appservices/WjE1LKeChsE0tsDD/rest/services/World/Route/NAServer/Route_World/solve");
+    routeParams = new RouteParameters();
+    routeParams.stops = new FeatureSet();
+    routeParams.barriers = new FeatureSet();
+    routeParams.outSpatialReference = {"wkid":102100};
+
+    routeTask.on("solve-complete", showRoute);
+    routeTask.on("error", errorHandler);
+
+    stopSymbol = new SimpleMarkerSymbol().setStyle(SimpleMarkerSymbol.STYLE_CROSS).setSize(15);
+    stopSymbol.outline.setWidth(3);
+
+    barrierSymbol = new SimpleMarkerSymbol().setStyle(SimpleMarkerSymbol.STYLE_X).setSize(10);
+    barrierSymbol.outline.setWidth(3).setColor(new Color([255,0,0]));
+
+    routeSymbols = {
+      "Route 1": new SimpleLineSymbol().setColor(new Color([0,0,255,0.5])).setWidth(5),
+      "Route 2": new SimpleLineSymbol().setColor(new Color([0,255,0,0.5])).setWidth(5),
+      "Route 3": new SimpleLineSymbol().setColor(new Color([255,0,255,0.5])).setWidth(5)
+    };
+
+    //button click event listeners can't be added directly in HTML when the code is wrapped in an AMD callback
+    on(dom.byId("addStopsBtn"), "click", addStops);
+    on(dom.byId("clearStopsBtn"), "click", clearStops);
+    on(dom.byId("addBarriersBtn"), "click", addBarriers);
+    on(dom.byId("clearBarriersBtn"), "click", clearBarriers);
+    on(dom.byId("solveRoutesBtn"), "click", solveRoute);
+    on(dom.byId("clearRoutesBtn"), "click", clearRoutes);
+
+    //Begins listening for click events to add stops
+    function addStops() {
+      removeEventHandlers();
+      mapOnClick_addStops_connect = map2.on("click", addStop);
+    }
+
+    //Clears all stops
+    function clearStops() {
+      removeEventHandlers();
+      for (var i=routeParams.stops.features.length-1; i>=0; i--) {
+        map2.graphics.remove(routeParams.stops.features.splice(i, 1)[0]);
+      }
+    }
+
+    //Adds a stop. The stop is associated with the route currently displayed in the dropdown
+    function addStop(evt) {
+      routeParams.stops.features.push(
+        map2.graphics.add(
+          new esri.Graphic(
+            evt.mapPoint,
+            stopSymbol,
+            { RouteName:dom.byId("routeName").value }
+          )
+        )
+      );
+    }
+
+    //Begins listening for click events to add barriers
+    function addBarriers() {
+      removeEventHandlers();
+      mapOnClick_addBarriers_connect = on(map2, "click", addBarrier);
+    }
+
+    //Clears all barriers
+    function clearBarriers() {
+      removeEventHandlers();
+      for (var i=routeParams.barriers.features.length-1; i>=0; i--) {
+        map2.graphics.remove(routeParams.barriers.features.splice(i, 1)[0]);
+      }
+    }
+
+    //Adds a barrier
+    function addBarrier(evt) {
+      routeParams.barriers.features.push(
+        map2.graphics.add(
+          new esri.Graphic(
+            evt.mapPoint,
+            barrierSymbol
+          )
+        )
+      );
+    }
+
+    //Stops listening for click events to add barriers and stops (if they've already been wired)
+    function removeEventHandlers() {
+      if (mapOnClick_addStops_connect) {
+        mapOnClick_addStops_connect.remove();
+      }
+      if (mapOnClick_addBarriers_connect) {
+        mapOnClick_addBarriers_connect.remove();
+      }
+    }
+
+    //Solves the routes. Any errors will trigger the errorHandler function.
+    function solveRoute() {
+      removeEventHandlers();
+      routeTask.solve(routeParams);
+    }
+
+    //Clears all routes
+    function clearRoutes() {
+      for (var i=routes.length-1; i>=0; i--) {
+        map2.graphics.remove(routes.splice(i, 1)[0]);
+      }
+      routes = [];
+    }
+
+    //Draws the resulting routes on the map
+    function showRoute(evt) {
+      clearRoutes();
+
+      array.forEach(evt.result.routeResults, function(routeResult, i) {
+        routes.push(
+          map2.graphics.add(
+            routeResult.route.setSymbol(routeSymbols[routeResult.routeName])
+          )
+        );
+      });
+
+      var msgs = ["Server messages:"];
+      array.forEach(evt.result.messages, function(message) {
+        msgs.push(message.type + " : " + message.description);
+      });
+      if (msgs.length > 1) {
+        alert(msgs.join("\n - "));
+      }
+    }
+
+    //Reports any errors that occurred during the solve
+    function errorHandler(err) {
+      alert("An error occured\n" + err.message + "\n" + err.details.join("\n"));
+    }
+  });
+</script>
+    </body>
+
+
+
+    <body class="claro">
+
+
+   Select route name: <select id="routeName">
+     <option value="Route 1">Route 1</option>
+     <option value="Route 2">Route 2</option>
+     <option value="Route 3">Route 3</option>
+   </select> to
+       <button id="addStopsBtn">Add Stops</button>
+       <button id="clearStopsBtn">Clear Stops</button>
+       <button id="addBarriersBtn">Add Barriers</button>
+       <button id="clearBarriersBtn">Clear Barriers</button>
+       <button id="solveRoutesBtn">Solve Routes</button>
+       <button id="clearRoutesBtn">Clear Routes</button>
+   <br /><br />
+
+   <!-- Map size can be adjusted here! -->
+   <div id="map2" style="width:1200px; height:1200px; border:2px solid #000;"></div>
+    <ol>
+     <li>Select a route name from the drop down.</li>
+     <li>Click 'Add stops', then click on map to add stops to route.</li>
+
+     <li>Click the 'Add Barriers', then click on map to add barriers.</li>
+     <li>Optionally, repeat the above steps to add more routes.</li>
+     <li>Click the 'Solve Routes' to solve.</li>
+   </ul>
+   <p>Any server error messages will be displayed in an alert box.</p>
+ </body>
+
+</html>
